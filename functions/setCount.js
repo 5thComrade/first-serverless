@@ -4,6 +4,7 @@ const MongoClient = mongodb.MongoClient;
 const connectionURL = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@abl.3aejj.mongodb.net`;
 
 const getData = async (browser, ip, mobile) => {
+  let obj;
   const client = await MongoClient.connect(connectionURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -16,52 +17,58 @@ const getData = async (browser, ip, mobile) => {
     })
     .toArray();
 
-  // let browserData;
-  // if (!findResult[0].browser[browser[0]]) {
-  //   browserData = {
-  //     ...findResult[0].browser,
-  //     [browser[0]]: 1,
-  //   };
-  // } else {
-  //   browserData = {
-  //     ...findResult[0].browser,
-  //     [browser[0]]: findResult[0].browser[browser[0]] + 1,
-  //   };
-  // }
+  if (findResult) {
+    let browserData;
+    if (!findResult[0].browser[browser[0]]) {
+      browserData = {
+        ...findResult[0].browser,
+        [browser[0]]: 1,
+      };
+    } else {
+      browserData = {
+        ...findResult[0].browser,
+        [browser[0]]: findResult[0].browser[browser[0]] + 1,
+      };
+    }
 
-  // let ipData;
-  // if (!findResult[0].ip[ip[0]]) {
-  //   ipData = {
-  //     ...findResult[0].ip,
-  //     [ip[0]]: 1,
-  //   };
-  // } else {
-  //   ipData = {
-  //     ...findResult[0].ip,
-  //     [ip[0]]: findResult[0].ip[ip[0]] + 1,
-  //   };
-  // }
+    let ipData;
+    if (!findResult[0].ip[ip[0]]) {
+      ipData = {
+        ...findResult[0].ip,
+        [ip[0]]: 1,
+      };
+    } else {
+      ipData = {
+        ...findResult[0].ip,
+        [ip[0]]: findResult[0].ip[ip[0]] + 1,
+      };
+    }
 
-  // let mobileData;
-  // if (!findResult[0].mobileBrowsers[mobile[0]]) {
-  //   mobileData = {
-  //     ...findResult[0].mobileBrowsers,
-  //     [mobile[0]]: 1,
-  //   };
-  // } else {
-  //   mobileData = {
-  //     ...findResult[0].mobileBrowsers,
-  //     [mobile[0]]: findResult[0].mobileBrowsers[mobile[0]] + 1,
-  //   };
-  // }
-
-  const obj = {
-    ...findResult[0],
-    visits: findResult[0].visits + 1,
-    // browser: browserData,
-    // ip: ipData,
-    // mobileBrowsers: mobileData,
-  };
+    let mobileData;
+    if (!findResult[0].mobileBrowsers[mobile[0]]) {
+      mobileData = {
+        ...findResult[0].mobileBrowsers,
+        [mobile[0]]: 1,
+      };
+    } else {
+      mobileData = {
+        ...findResult[0].mobileBrowsers,
+        [mobile[0]]: findResult[0].mobileBrowsers[mobile[0]] + 1,
+      };
+    }
+    obj = {
+      ...findResult[0],
+      visits: findResult[0].visits + 1,
+      browser: browserData,
+      ip: ipData,
+      mobileBrowsers: mobileData,
+    };
+  } else {
+    obj = {
+      ...findResult[0],
+      visits: findResult[0].visits + 1,
+    };
+  }
 
   const finalResult = await collection.findOneAndReplace(
     { name: "Paws_N_Claws Analysis" },
