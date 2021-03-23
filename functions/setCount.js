@@ -42,18 +42,18 @@ const getData = async (browser, ip, mobile) => {
     };
   }
 
-  let mobileData;
-  if (!findResult[0].mobileBrowsers[mobile[0]]) {
-    mobileData = {
-      ...findResult[0].mobileBrowsers,
-      [mobile[0]]: 1,
-    };
-  } else {
-    mobileData = {
-      ...findResult[0].mobileBrowsers,
-      [mobile[0]]: findResult[0].mobileBrowsers[mobile[0]] + 1,
-    };
-  }
+  // let mobileData;
+  // if (!findResult[0].mobileBrowsers[mobile[0]]) {
+  //   mobileData = {
+  //     ...findResult[0].mobileBrowsers,
+  //     [mobile[0]]: 1,
+  //   };
+  // } else {
+  //   mobileData = {
+  //     ...findResult[0].mobileBrowsers,
+  //     [mobile[0]]: findResult[0].mobileBrowsers[mobile[0]] + 1,
+  //   };
+  // }
 
   const obj = {
     ...findResult[0],
