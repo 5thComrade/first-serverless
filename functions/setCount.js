@@ -29,38 +29,38 @@ const getData = async (browser, ip, mobile) => {
   //   };
   // }
 
-  let ipData;
-  if (!findResult[0].ip[ip[0]]) {
-    ipData = {
-      ...findResult[0].ip,
-      [ip[0]]: 1,
-    };
-  } else {
-    ipData = {
-      ...findResult[0].ip,
-      [ip[0]]: findResult[0].ip[ip[0]] + 1,
-    };
-  }
+  // let ipData;
+  // if (!findResult[0].ip[ip[0]]) {
+  //   ipData = {
+  //     ...findResult[0].ip,
+  //     [ip[0]]: 1,
+  //   };
+  // } else {
+  //   ipData = {
+  //     ...findResult[0].ip,
+  //     [ip[0]]: findResult[0].ip[ip[0]] + 1,
+  //   };
+  // }
 
-  let mobileData;
-  if (!findResult[0].mobileBrowsers[mobile[0]]) {
-    mobileData = {
-      ...findResult[0].mobileBrowsers,
-      [mobile[0]]: 1,
-    };
-  } else {
-    mobileData = {
-      ...findResult[0].mobileBrowsers,
-      [mobile[0]]: findResult[0].mobileBrowsers[mobile[0]] + 1,
-    };
-  }
+  // let mobileData;
+  // if (!findResult[0].mobileBrowsers[mobile[0]]) {
+  //   mobileData = {
+  //     ...findResult[0].mobileBrowsers,
+  //     [mobile[0]]: 1,
+  //   };
+  // } else {
+  //   mobileData = {
+  //     ...findResult[0].mobileBrowsers,
+  //     [mobile[0]]: findResult[0].mobileBrowsers[mobile[0]] + 1,
+  //   };
+  // }
 
   const obj = {
     ...findResult[0],
     visits: findResult[0].visits + 1,
     // browser: browserData,
-    ip: ipData,
-    mobileBrowsers: mobileData,
+    // ip: ipData,
+    // mobileBrowsers: mobileData,
   };
 
   const finalResult = await collection.findOneAndReplace(
