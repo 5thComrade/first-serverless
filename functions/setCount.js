@@ -4,9 +4,6 @@ const MongoClient = mongodb.MongoClient;
 const connectionURL = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@abl.3aejj.mongodb.net`;
 
 const getData = async (browser, ip, mobile) => {
-  console.log(browser);
-  console.log(ip);
-  console.log(mobile);
   const client = await MongoClient.connect(connectionURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -75,9 +72,9 @@ const getData = async (browser, ip, mobile) => {
 
 exports.handler = async function (event, context) {
   const data = await getData(
-    event.multiValueHeaders["sec-ch-ua"][0],
-    event.multiValueHeaders["client-ip"][0],
-    event.multiValueHeaders["sec-ch-ua-mobile"][0]
+    event.headers["sec-ch-ua"],
+    event.headers["client-ip"],
+    event.headers["sec-ch-ua-mobile"]
   );
 
   return {
