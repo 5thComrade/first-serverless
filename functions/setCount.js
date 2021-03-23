@@ -16,18 +16,18 @@ const getData = async (browser, ip, mobile) => {
     })
     .toArray();
 
-  let browserData;
-  if (!findResult[0].browser[browser[0]]) {
-    browserData = {
-      ...findResult[0].browser,
-      [browser[0]]: 1,
-    };
-  } else {
-    browserData = {
-      ...findResult[0].browser,
-      [browser[0]]: findResult[0].browser[browser[0]] + 1,
-    };
-  }
+  // let browserData;
+  // if (!findResult[0].browser[browser[0]]) {
+  //   browserData = {
+  //     ...findResult[0].browser,
+  //     [browser[0]]: 1,
+  //   };
+  // } else {
+  //   browserData = {
+  //     ...findResult[0].browser,
+  //     [browser[0]]: findResult[0].browser[browser[0]] + 1,
+  //   };
+  // }
 
   let ipData;
   if (!findResult[0].ip[ip[0]]) {
@@ -42,23 +42,23 @@ const getData = async (browser, ip, mobile) => {
     };
   }
 
-  // let mobileData;
-  // if (!findResult[0].mobileBrowsers[mobile[0]]) {
-  //   mobileData = {
-  //     ...findResult[0].mobileBrowsers,
-  //     [mobile[0]]: 1,
-  //   };
-  // } else {
-  //   mobileData = {
-  //     ...findResult[0].mobileBrowsers,
-  //     [mobile[0]]: findResult[0].mobileBrowsers[mobile[0]] + 1,
-  //   };
-  // }
+  let mobileData;
+  if (!findResult[0].mobileBrowsers[mobile[0]]) {
+    mobileData = {
+      ...findResult[0].mobileBrowsers,
+      [mobile[0]]: 1,
+    };
+  } else {
+    mobileData = {
+      ...findResult[0].mobileBrowsers,
+      [mobile[0]]: findResult[0].mobileBrowsers[mobile[0]] + 1,
+    };
+  }
 
   const obj = {
     ...findResult[0],
     visits: findResult[0].visits + 1,
-    browser: browserData,
+    // browser: browserData,
     ip: ipData,
     mobileBrowsers: mobileData,
   };
