@@ -8,5 +8,9 @@
     "dev": "netlify dev"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "mongodb": "^3.6.5"
+  }
 }
